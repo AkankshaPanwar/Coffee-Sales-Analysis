@@ -1,0 +1,82 @@
+---
+title: "Coffee Sales Analysis"
+author: "Akanksha Panwar"
+date: "2024-09-01"
+output: html_document
+---
+
+# Business Task:
+
+* This dataset contains detailed records of coffee sales from a vending machine.The dataset spans from March 2024 to Present time, capturing daily transaction data. And new information
+continues to be added.
+* The dataset has 6 columns and 1133 entries.
+
+# Preparing the Data:
+## Loading packages
+```{r}
+library(tidyverse)
+library(janitor)
+library(reshape2)
+```
+
+## Importing Datasets
+
+```{r}
+coffee_sales <- read_csv("~/Users/Documents/Projects/Unified/Coffee sales.csv")
+```
+
+# Cleaning Process:
+
+```{r}
+glimpse(coffee_sales)
+```
+```{r}
+coffee_sales[duplicated(coffee_sales), ]
+coffee_sales %>% filter(!complete.cases(.)) %>% na.omit(card)
+```
+
+* The dataset seems to be perfectly clean. No duplicate data, nor missing values.
+* All the columns are the right format too.
+
+# Analysing Data:
+
+```{r}
+summary(coffee_sales)
+```
+* People tend to spend 33 currency on an average.
+* The dataset contains entries till 31st of July, 2024.
+
+```{r}
+coffee_sales %>% select(coffee_name, money) %>% unique()
+```
+
+* Apparently, the price of each kind of coffee isnt necessarily constant throughout.
+
+# Creating Visualizations:
+
+```{r}
+coffee_sales %>% ggplot(aes(fct_infreq(coffee_name)))+
+     geom_bar(fill = "#331900")+
+     coord_flip()+
+     theme_minimal()+
+     labs(title = "Demand for each kind of coffee", x = "Kind of Coffee",  y = NULL)
+```
+```{r}
+coffee_sales %>% ggplot(aes(date, money, colour = coffee_name))+
+     geom_point(size = 5, alpha = 0.5)+
+     geom_smooth(method = lm, se = F)+
+     facet_wrap(~cash_type)+
+     theme_minimal()+
+     labs(title = "Coffee prices", x = "Months", y = "Price")
+```
+
+# Conclusion:
+
+The insights I have drawn from teh graphs above are as follows
+* * Among the total beverages sold, majority is 'Americano with milk'.
+* The most popular drinks are Americano with milk, Latte, and Cappuccino.
+* Over the course of 5 months, the prices for all the beverages seemed to drop slightly.
+* Cortado and espresso seemed to be the cheapest and Cappuccino, Latte, Hot chocolate and Cocoa seemed to be among the most expensive.
+* People tended to pay using card over cash and since June, cash payment seems to have stopped altogether.
+
+### Thank you for reading!

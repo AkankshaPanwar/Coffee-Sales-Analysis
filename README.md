@@ -86,7 +86,7 @@ coffee_sales %>% ggplot(aes(date, money, colour = coffee_name))+
 # Conclusion:
 
 The insights I have drawn from the graphs above are as follows
-* * Among the total beverages sold, the majority is 'Americano with milk'.
+* Among the total beverages sold, the majority is 'Americano with milk'.
 * Americano with milk, Latte, and Cappuccino are the most popular drinks.
 * Over 5 months, the prices for all the beverages seemed to drop slightly.
 * Cortado and espresso seemed the cheapest and Cappuccino, Latte, Hot chocolate, and Cocoa were among the most expensive.
